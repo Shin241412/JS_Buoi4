@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto Sans Mono">
+        <title>JS-Buổi 3</title>
+        <style>
+            *
+            {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body
+            {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                background: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
+                overflow: hidden;
+                font-family: "Noto Sans Mono";
+                user-select: none;
+            }
+            /* Container */
+            .container
+            {
+                position: relative;
+                width: 300px;
+                height: 170px;
+                background: rgba(255, 255, 255, 0.1);
+                box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(4px);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+                border-radius: 12px;
+                border-right: 1px solid rgba(255, 255, 255, 0.15);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            }
+            /* Form */
+            form
+            {
+                padding: 10px;
+            }
+            /* Input and Button */
+            input,button
+            {
+                width: 100%;
+                padding: 5px;
+                border: none;
+                background: rgba(255, 255, 255, 0.1);
+                box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.08);
+                border-radius: 6px;
+                border-right: 1px solid rgba(255, 255, 255, 0.15);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+                color: #ffffff;
+            }
+            /* Input */
+            input:focus
+            {
+                outline: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            input::placeholder
+            {
+                color: #ffffff;
+            }
+            /* Button */
+            button 
+            {
+                position: relative;
+                width: 110px;
+                height: 30px;
+                padding: 0;
+                margin: 30px 10px 10px 10px;
+                cursor: pointer;
+                background: #ffffff;
+                color: #666666;
+                transition: transform 0.5s ease;
+            }
+            button:nth-of-type(1)::before,
+            button:nth-of-type(1)::after,
+            button:nth-of-type(2)::before,
+            button:nth-of-type(2)::after
+            {
+                content: '';
+                position: absolute;
+                opacity: 0.3;
+                background: #ffffff;
+                box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.08);
+                border-radius: 6px;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                bottom: 0;
+                z-index: -1;
+                transition: 1s;
+            }
+            /* Button 1 */
+            button:nth-of-type(1):hover
+            {
+                transform: translate(-10px, -10px);
+                background: #a6c0fe;
+            }
+            button:nth-of-type(1):hover::before
+            {
+                transform: translate(5px, 5px);
+                background: #a6c0fe;
+            }
+            button:nth-of-type(1):hover::after
+            {
+                transform: translate(10px, 10px);
+                background: #a6c0fe;
+            }
+            /* Button 2 */
+            button:nth-of-type(2):hover
+            {
+                transform: translate(10px, -10px);
+                background: #f68084;
+            }
+            button:nth-of-type(2):hover::before
+            {
+                transform: translate(-5px, 5px);
+                background: #f68084;
+            }
+            button:nth-of-type(2):hover::after
+            {
+                transform: translate(-10px, 10px);
+                background: #f68084;
+            }
+            /* Geometry */
+            .box
+            {
+                position: relative;
+            }
+            .box .geometry
+            {
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                color: #ffffff;
+                background: rgba(255, 255, 255, 0.1);
+                box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(4px);
+                border-right: 1px solid rgba(255, 255, 255, 0.15);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+                border-radius: 16px;
+                transform: translate(-10px, -20px) rotate(5deg);
+                animation: animated 5s linear infinite alternate;
+                animation-delay: calc(0.3s * var(--i));
+            }
+            @keyframes animated
+            {
+                0%
+                {
+                    transform: translate(-10px, -20px) rotate(5deg);
+                }
+                100%
+                {
+                    transform: translate(10px, 20px) rotate(0deg);
+                }
+            }
+            .box .geometry:nth-child(1)
+            {
+                top: -200px;
+                right: -100px;
+                width: 200px;
+                height: 200px;
+                z-index: -1;
+            }
+            .box .geometry:nth-child(2)
+            {
+                top: -220px;
+                left: -400px;
+                width: 150px;
+                height: 150px;
+                z-index: 1;
+            }
+            .box .geometry:nth-child(3)
+            {
+                bottom: -300px;
+                left: -600px;
+                width: 250px;
+                height: 250px;
+            }
+            .box .geometry:nth-child(4)
+            {
+                bottom: -200px;
+                right: -100px;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+            }
+            .box .geometry:nth-child(5)
+            {
+                bottom: -300px;
+                left: -200px;
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+            }
+            .box .geometry:nth-child(6)
+            {
+                top: -150px;
+                right: -400px;
+                width: 320px;
+                height: 300px;
+                z-index: -2;
+            }
+            .box .geometry:nth-child(6) p:nth-of-type(1)
+            {
+                top: 60px;
+            }
+            .box .geometry:last-child
+            {
+                top: -160px;
+                left: -550px;
+                width: 160px;
+                height: 160px;
+                border-radius: 50%;
+            }
+            .box .geometry p
+            {
+                position: absolute;
+                padding: 10px;
+                font-weight: 600;
+                text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+            }
+            #result_6
+            {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                box-shadow:  0px 20px 40px rgba(0, 0, 0, 0.1);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <form onsubmit="return false">
+                <input id="input" type="number" placeholder="Nhập số bất kỳ" autofocus>
+                <button id="button" type="submit" onclick="enter()">Nhập dữ liệu</button>
+                <button id="generate" type="submit" onclick="result()">Generate</button>
+            </form>
+        </div>
+        <div class="box">
+            <div class="geometry" style="--i: 0;">
+                <p id="result_1"></p>
+            </div>
+            <div class="geometry" style="--i: 1;">
+                <p id="result_2"></p>
+            </div>
+            <div class="geometry" style="--i: 2;">
+                <p id="result_3"></p>
+            </div>
+            <div class="geometry" style="--i: 3;">
+                <img src="img/icon_5.svg" width="70px" height="auto">
+            </div>
+            <div class="geometry" style="--i: 4;">
+                <img src="img/icon_6.svg" width="100px" height="auto">
+            </div>
+            <div class="geometry" style="--i: 5;">
+                <p id="result_4"></p>
+                <p id="result_5"></p>
+            </div>
+            <div class="geometry" style="--i: 6;">
+                <img src="img/icon_7.svg" width="100px" height="auto">
+                <p id="result_6"></p>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
